@@ -1,7 +1,7 @@
 aid: novita-ai
 url: https://raw.githubusercontent.com/api-evangelist/novita-ai/refs/heads/main/apis.yml
 name: Novita AI
-x-type: company
+kind: company
 description: >-
   Novita AI is an AI inference cloud offering serverless LLM, image, video, and audio
   generation APIs alongside on-demand GPU rentals and serverless GPU endpoints. Hosts
