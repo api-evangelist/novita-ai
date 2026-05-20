@@ -70,6 +70,10 @@ apis:
       - type: Documentation
         url: https://novita.ai/docs/
 common:
+  - type: GitHubOrganization
+    url: https://github.com/novitalabs
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/novita-ai-labs
   - type: Website
     url: https://novita.ai/
   - type: Documentation
