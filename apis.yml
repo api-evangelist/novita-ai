@@ -84,6 +84,8 @@ common:
     url: rate-limits/novita-ai-rate-limits.yml
   - type: FinOps
     url: finops/novita-ai-finops.yml
+  - type: LLMsTxt
+    url: https://novita.ai/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
