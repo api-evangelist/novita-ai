@@ -1,0 +1,473 @@
+asyncapi: '2.6.0'
+id: 'urn:novita:ai:streaming-and-webhooks'
+info:
+  title: Novita AI Streaming & Webhook API
+  version: '1.0.0'
+  description: |
+    AsyncAPI 2.6 description of the asynchronous surfaces of the Novita AI platform:
+
+    1. **Server-Sent Events (SSE) streaming** for OpenAI-compatible chat completions
+       (`POST /openai/v1/chat/completions` with `stream: true`). Modeled as a
+       publish-from-server channel that emits incremental chat completion chunk
+       events terminated by the `[DONE]` sentinel.
+    2. **Outbound webhook callbacks** for the asynchronous image, video, image
+       editing, and upscale tasks created against the `/v3/async/*` and
+       `/v3beta/*` task endpoints. When a request includes
+       `extra.webhook.url`, Novita AI delivers the completed task result to the
+       caller-hosted endpoint with the same payload shape returned by the
+       `GET /v3/async/task-result` polling endpoint.
+
+    Scope is deliberately limited to event-driven surfaces. Synchronous REST
+    operations (LLM non-streaming chat, embeddings, reranking, batch, GPU
+    instance management, Seedream 4.0 synchronous image generation, etc.) are
+    described separately in the OpenAPI document referenced from `apis.yml`.
+  contact:
+    name: Novita AI
+    url: https://novita.ai/docs/
+  license:
+    name: Proprietary
+    url: https://novita.ai/legal/terms-of-service
+  termsOfService: https://novita.ai/legal/terms-of-service
+  tags:
+    - name: AI
+    - name: LLM
+    - name: SSE
+    - name: Streaming
+    - name: Webhooks
+    - name: AsyncTasks
+    - name: ImageGeneration
+    - name: VideoGeneration
+defaultContentType: application/json
+servers:
+  production:
+    url: api.novita.ai
+    protocol: https
+    description: |
+      Novita AI production API host. SSE chat completion streams originate from
+      `https://api.novita.ai/openai/v1/chat/completions`. Async task submissions
+      target `https://api.novita.ai/v3/async/*` (or `https://api.novita.ai/v3beta/*`
+      for select FLUX endpoints), and webhook callbacks are dispatched outbound
+      from this host to the URL supplied in `extra.webhook.url`.
+    security:
+      - bearerAuth: []
+  webhook-receiver:
+    url: '{webhookHost}'
+    protocol: https
+    description: |
+      Customer-hosted HTTPS endpoint that receives outbound POST callbacks from
+      Novita AI when an async task completes. The exact URL is the
+      `extra.webhook.url` value supplied at task submission time.
+    variables:
+      webhookHost:
+        description: Customer-controlled hostname registered via `extra.webhook.url`.
+        default: webhooks.example.com
+channels:
+  /openai/v1/chat/completions:
+    description: |
+      Server-Sent Events stream for OpenAI-compatible chat completions. Opened
+      by `POST https://api.novita.ai/openai/v1/chat/completions` with
+      `Accept: text/event-stream` and request body `stream: true`. Each `data:`
+      frame carries a JSON `chat.completion.chunk` object; the stream terminates
+      with the literal frame `data: [DONE]`.
+    bindings:
+      http:
+        type: request
+        method: POST
+        bindingVersion: '0.3.0'
+    subscribe:
+      operationId: subscribeChatCompletionStream
+      summary: Receive incremental chat completion chunks over SSE.
+      description: |
+        While the underlying transport is an HTTP response with
+        `Content-Type: text/event-stream`, from the client's perspective the
+        server publishes a sequence of `chat.completion.chunk` events followed
+        by a `[DONE]` sentinel.
+      tags:
+        - name: LLM
+        - name: SSE
+        - name: Streaming
+      message:
+        oneOf:
+          - $ref: '#/components/messages/ChatCompletionChunk'
+          - $ref: '#/components/messages/ChatCompletionStreamDone'
+  webhook/task-result:
+    description: |
+      Outbound webhook delivered to the URL provided in `extra.webhook.url` at
+      async task submission time. The POST body matches the synchronous
+      `GET /v3/async/task-result?task_id={task_id}` response and is dispatched
+      once on task completion. Applies to image generation
+      (`/v3/async/txt2img`, `/v3/async/img2img`, FLUX, Seedream 3.0,
+      Qwen image), image editing (`/v3/async/upscale`,
+      `/v3/async/remove-background`, `/v3/async/replace-background`,
+      `/v3/async/inpainting`), and video generation
+      (`/v3/async/txt2video`, `/v3/async/img2video`,
+      `/v3/async/hunyuan-video-fast`, `/v3/async/kling-v2.1-t2v-master`,
+      `/v3/async/minimax-hailuo-02`).
+    bindings:
+      http:
+        type: request
+        method: POST
+        bindingVersion: '0.3.0'
+    publish:
+      operationId: publishTaskResultWebhook
+      summary: Receive completed async task results.
+      description: |
+        Novita AI POSTs the completed task payload to the customer webhook
+        endpoint. The customer endpoint is expected to respond `2xx` to
+        acknowledge receipt.
+      tags:
+        - name: Webhooks
+        - name: AsyncTasks
+      message:
+        $ref: '#/components/messages/TaskResultWebhook'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: |
+        Novita API key passed as `Authorization: Bearer <NOVITA_API_KEY>` on the
+        request that opens the SSE stream. Webhook callbacks are outbound from
+        Novita AI and are authenticated by the secrecy of the receiver URL.
+  messages:
+    ChatCompletionChunk:
+      name: chatCompletionChunk
+      title: Chat Completion Chunk
+      summary: A single incremental token/delta frame in an SSE chat completion stream.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ChatCompletionChunk'
+      examples:
+        - name: firstChunkRoleDelta
+          summary: First frame in a stream, declaring assistant role.
+          payload:
+            id: chatcmpl-9pZxYabc
+            object: chat.completion.chunk
+            created: 1748563200
+            model: meta-llama/llama-3.1-8b-instruct
+            choices:
+              - index: 0
+                delta:
+                  role: assistant
+                  content: ''
+                finish_reason: null
+        - name: contentChunk
+          summary: Mid-stream token delivery.
+          payload:
+            id: chatcmpl-9pZxYabc
+            object: chat.completion.chunk
+            created: 1748563200
+            model: meta-llama/llama-3.1-8b-instruct
+            choices:
+              - index: 0
+                delta:
+                  content: 'Hello'
+                finish_reason: null
+        - name: finalChunkWithUsage
+          summary: |
+            Terminal chunk emitted when `stream_options.include_usage` is true.
+          payload:
+            id: chatcmpl-9pZxYabc
+            object: chat.completion.chunk
+            created: 1748563200
+            model: meta-llama/llama-3.1-8b-instruct
+            choices:
+              - index: 0
+                delta: {}
+                finish_reason: stop
+            usage:
+              prompt_tokens: 12
+              completion_tokens: 24
+              total_tokens: 36
+    ChatCompletionStreamDone:
+      name: chatCompletionStreamDone
+      title: SSE Stream Terminator
+      summary: |
+        Sentinel frame written by the server as the literal SSE line
+        `data: [DONE]` to signal end of stream.
+      contentType: text/plain
+      payload:
+        type: string
+        const: '[DONE]'
+        description: Literal `[DONE]` terminator frame.
+    TaskResultWebhook:
+      name: taskResultWebhook
+      title: Async Task Result Webhook
+      summary: |
+        Final task payload delivered to `extra.webhook.url` when an async
+        image/video/edit task reaches a terminal status.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          Content-Type:
+            type: string
+            const: application/json
+      payload:
+        $ref: '#/components/schemas/TaskResult'
+      examples:
+        - name: succeededImageTask
+          summary: Successful txt2img / upscale-style result.
+          payload:
+            task:
+              task_id: 71dd988e-632e-4339-b217-74bcbe6db0ee
+              task_type: TXT_TO_IMG
+              status: TASK_STATUS_SUCCEED
+              reason: ''
+              eta: 0
+              progress_percent: 100
+            images:
+              - image_url: https://faas-output-image.s3.amazonaws.com/.../0.png
+                image_url_ttl: '604800'
+                image_type: png
+                nsfw_detection_result: null
+        - name: succeededVideoTask
+          summary: Successful video generation result (hunyuan/kling/hailuo).
+          payload:
+            task:
+              task_id: 0e0a6b4c-1f0a-4e2a-9a4a-5c6e7f8a9b0c
+              task_type: TXT_TO_VIDEO
+              status: TASK_STATUS_SUCCEED
+              reason: ''
+              eta: 0
+              progress_percent: 100
+            videos:
+              - video_url: https://faas-output-image.s3.amazonaws.com/.../video.mp4
+                video_url_ttl: '604800'
+                video_type: mp4
+        - name: failedTask
+          summary: Failed task callback.
+          payload:
+            task:
+              task_id: 71dd988e-632e-4339-b217-74bcbe6db0ee
+              task_type: TXT_TO_IMG
+              status: TASK_STATUS_FAILED
+              reason: model load failed
+              eta: 0
+              progress_percent: 0
+        - name: testModeCallback
+          summary: |
+            Test-mode callback triggered when `extra.webhook.test_mode.enabled`
+            is true. Status mirrors `extra.webhook.test_mode.return_task_status`.
+          payload:
+            task:
+              task_id: test-task
+              task_type: TXT_TO_IMG
+              status: TASK_STATUS_SUCCEED
+              reason: ''
+              eta: 0
+              progress_percent: 100
+  schemas:
+    ChatCompletionChunk:
+      type: object
+      description: |
+        OpenAI-compatible streaming chunk. Mirrors the shape returned by
+        `POST /openai/v1/chat/completions` when `stream: true`.
+      required:
+        - id
+        - object
+        - created
+        - model
+        - choices
+      properties:
+        id:
+          type: string
+          description: Stable identifier shared by every chunk in a single stream.
+        object:
+          type: string
+          const: chat.completion.chunk
+        created:
+          type: integer
+          format: int64
+          description: Unix epoch seconds at which the stream was created.
+        model:
+          type: string
+          description: Model identifier that produced the chunk.
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatCompletionChunkChoice'
+        usage:
+          $ref: '#/components/schemas/Usage'
+          description: |
+            Present only on the final chunk when the request set
+            `stream_options.include_usage: true`. Null on intermediate chunks.
+    ChatCompletionChunkChoice:
+      type: object
+      required:
+        - index
+        - delta
+      properties:
+        index:
+          type: integer
+          description: Choice index (always 0 for single-choice requests).
+        delta:
+          $ref: '#/components/schemas/ChatCompletionDelta'
+        finish_reason:
+          type: string
+          nullable: true
+          enum:
+            - stop
+            - length
+            - tool_calls
+            - content_filter
+            - null
+          description: |
+            Null until the model finishes; populated on the terminal content
+            chunk for the choice.
+        logprobs:
+          type: object
+          nullable: true
+          description: 'Per-token log probabilities when `logprobs: true` was set.'
+    ChatCompletionDelta:
+      type: object
+      description: Incremental delta applied to the assistant message.
+      properties:
+        role:
+          type: string
+          enum:
+            - assistant
+          description: Present on the first chunk only.
+        content:
+          type: string
+          description: Token text appended to the assistant message.
+        tool_calls:
+          type: array
+          description: |
+            Streaming tool-call deltas emitted when the model invokes a tool
+            declared via the `tools` request field.
+          items:
+            $ref: '#/components/schemas/ToolCallDelta'
+    ToolCallDelta:
+      type: object
+      properties:
+        index:
+          type: integer
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+            - function
+        function:
+          type: object
+          properties:
+            name:
+              type: string
+            arguments:
+              type: string
+              description: JSON-encoded argument fragment.
+    Usage:
+      type: object
+      properties:
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        total_tokens:
+          type: integer
+    TaskResult:
+      type: object
+      description: |
+        Payload shape shared by the `GET /v3/async/task-result` poll response
+        and the outbound webhook callback.
+      required:
+        - task
+      properties:
+        task:
+          $ref: '#/components/schemas/Task'
+        images:
+          type: array
+          description: Present for image generation and image editing tasks.
+          items:
+            $ref: '#/components/schemas/TaskImage'
+        videos:
+          type: array
+          description: Present for video generation tasks.
+          items:
+            $ref: '#/components/schemas/TaskVideo'
+    Task:
+      type: object
+      required:
+        - task_id
+        - status
+      properties:
+        task_id:
+          type: string
+          description: Identifier returned by the original async submission.
+        task_type:
+          type: string
+          description: |
+            Task category, e.g. `TXT_TO_IMG`, `IMG_TO_IMG`, `UPSCALE`,
+            `REMOVE_BACKGROUND`, `REPLACE_BACKGROUND`, `INPAINTING`,
+            `TXT_TO_VIDEO`, `IMG_TO_VIDEO`.
+        status:
+          type: string
+          enum:
+            - TASK_STATUS_QUEUED
+            - TASK_STATUS_PROCESSING
+            - TASK_STATUS_SUCCEED
+            - TASK_STATUS_FAILED
+        reason:
+          type: string
+          description: Failure detail when `status` is `TASK_STATUS_FAILED`.
+        eta:
+          type: integer
+          description: Estimated seconds remaining.
+        progress_percent:
+          type: integer
+          minimum: 0
+          maximum: 100
+    TaskImage:
+      type: object
+      properties:
+        image_url:
+          type: string
+          format: uri
+        image_url_ttl:
+          type: string
+          description: Time-to-live (seconds) for the signed `image_url`.
+        image_type:
+          type: string
+          enum:
+            - png
+            - webp
+            - jpeg
+        nsfw_detection_result:
+          type: object
+          nullable: true
+          description: |
+            Populated when NSFW detection was enabled on the original task.
+    TaskVideo:
+      type: object
+      properties:
+        video_url:
+          type: string
+          format: uri
+        video_url_ttl:
+          type: string
+        video_type:
+          type: string
+          enum:
+            - mp4
+    WebhookConfig:
+      type: object
+      description: |
+        Shape of the `extra.webhook` object supplied on async task submission.
+        Documented here for reference; not transmitted on the callback itself.
+      properties:
+        url:
+          type: string
+          format: uri
+          description: HTTPS endpoint that will receive the task result callback.
+        test_mode:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+            return_task_status:
+              type: string
+              enum:
+                - TASK_STATUS_SUCCEED
+                - TASK_STATUS_FAILED

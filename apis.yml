@@ -21,7 +21,7 @@ tags:
   - Sandbox
   - MCP
 created: '2026-05-08'
-modified: '2026-05-25'
+modified: '2026-05-30'
 specificationVersion: '0.19'
 apis:
   - aid: novita-ai:platform
@@ -58,6 +58,8 @@ apis:
         url: openapi/novita-ai-openapi.json
       - type: OpenAPIDiscovery
         url: https://novita.ai/.well-known/openapi.json
+      - type: AsyncAPI
+        url: asyncapi/novita-ai-asyncapi.yaml
       - type: OpenAICompatibleBaseURL
         url: https://api.novita.ai/openai
       - type: Authentication
