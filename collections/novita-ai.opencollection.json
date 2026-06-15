@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Novita API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "List models",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.novita.ai/openai/v1/models"
+      },
+      "docs": "List available OpenAI-compatible models."
+    },
+    {
+      "info": {
+        "name": "Create chat completion",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.novita.ai/openai/v1/chat/completions"
+      },
+      "docs": "Create an OpenAI-compatible chat completion."
+    },
+    {
+      "info": {
+        "name": "Create completion",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.novita.ai/openai/v1/completions"
+      },
+      "docs": "Create an OpenAI-compatible text completion."
+    },
+    {
+      "info": {
+        "name": "Create embeddings",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.novita.ai/openai/v1/embeddings"
+      },
+      "docs": "Create OpenAI-compatible embeddings."
+    }
+  ],
+  "bundled": true
+}
