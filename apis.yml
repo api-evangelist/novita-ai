@@ -7,7 +7,7 @@ description: >-
   generation APIs alongside on-demand GPU rentals and serverless GPU endpoints. Hosts
   open-source models with both native and OpenAI-compatible chat surfaces, plus an
   agent sandbox and MCP server for tool-using agents.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - AI
   - LLM
@@ -33,7 +33,7 @@ apis:
       MiniMax Hailuo), audio (MiniMax Speech 02 HD TTS and GLM ASR), authentication,
       billing, and account management. Native base URL https://api.novita.ai;
       OpenAI-compatible https://api.novita.ai/openai.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://novita.ai/docs/api-reference/api-reference-overview
     baseURL: https://api.novita.ai
     tags:
@@ -78,7 +78,7 @@ apis:
       On-demand GPU instance management and templates plus serverless GPU endpoints.
       Create, start, stop, and delete instances; list products and templates;
       query usage-based and fixed-term billing.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://novita.ai/docs/api-reference/gpu-instance-create-instance
     baseURL: https://api.novita.ai
     tags:
