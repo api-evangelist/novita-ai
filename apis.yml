@@ -68,7 +68,7 @@ apis:
         url: https://novita.ai/docs/api-reference/basic-error-code
       - type: ModelCatalog
         url: https://novita.ai/models
-      - type: SignUp
+      - type: Signup
         url: https://novita.ai/
       - type: Pricing
         url: https://novita.ai/pricing
@@ -108,7 +108,7 @@ common:
     url: https://novita.ai/docs/guides/introduction
   - type: Pricing
     url: https://novita.ai/pricing
-  - type: SignUp
+  - type: Signup
     url: https://novita.ai/
   - type: Blog
     url: https://novita.ai/blog
@@ -126,18 +126,18 @@ common:
     url: https://x.com/novitalabs
   - type: Discord
     url: https://discord.com/invite/Mqx7nWYzDF
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://novita.ai/llms.txt
-  - type: SDK
+  - type: SDKs
     name: Python SDK
     url: https://github.com/novitalabs/python-sdk
-  - type: SDK
+  - type: SDKs
     name: JavaScript / TypeScript SDK
     url: https://github.com/novitalabs/javascript-sdk
-  - type: SDK
+  - type: SDKs
     name: Go SDK
     url: https://github.com/novitalabs/golang-sdk
-  - type: SDK
+  - type: SDKs
     name: LangChain Integration
     url: https://github.com/novitalabs/langchain-novita
   - type: CLI

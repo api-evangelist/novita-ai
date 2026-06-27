@@ -5,8 +5,8 @@
       "source": "https://blogs.novita.ai/feed/",
       "feed_url": "https://blogs.novita.ai/feed/",
       "title": "",
-      "saved": 0,
-      "method": "none"
+      "saved": 16,
+      "method": "feed"
     },
     {
       "source": "https://novita.ai/",
@@ -16,6 +16,6 @@
       "method": "none"
     }
   ],
-  "post_count": 4,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T12:03:07Z",
+  "post_count": 28
 }
