@@ -98,6 +98,8 @@ apis:
       - type: ServerlessProductPage
         url: https://novita.ai/serverless
 common:
+  - type: AgenticAccess
+    url: agentic-access/novita-ai-agentic-access.yml
   - type: DomainSecurity
     url: security/novita-ai-domain-security.yml
   - type: Website
