@@ -98,6 +98,10 @@ apis:
       - type: ServerlessProductPage
         url: https://novita.ai/serverless
 common:
+  - type: AgentCard
+    url: a2a/novita-ai-a2a.yml
+    name: A2A Agent Card
+    description: Agent Card served at /.well-known/agent-card.json (near-conformant against A2A 1.0.0).
   - type: AgenticAccess
     url: agentic-access/novita-ai-agentic-access.yml
   - type: DomainSecurity
