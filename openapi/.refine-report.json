@@ -1,0 +1,14 @@
+{
+  "provider": "novita-ai",
+  "sources": [
+    "novita-ai-openai-api-openapi.yml"
+  ],
+  "outputs": [
+    "novita-ai-openai-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
