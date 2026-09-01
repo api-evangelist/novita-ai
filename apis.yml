@@ -78,7 +78,7 @@ apis:
   humanURL: https://novita.ai/docs/api-reference/api-reference-overview
   baseURL: https://api.novita.ai
   tags:
-  - Openai
+  - OpenAI
   tags_raw:
   - Openai
   properties:
