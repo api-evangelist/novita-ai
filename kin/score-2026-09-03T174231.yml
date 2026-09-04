@@ -1,30 +1,33 @@
-# Kin Score artifact — novita-ai — 2026-08-04T083143
+# Kin Score artifact — novita-ai — 2026-09-03T174231
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: novita-ai
-  schema_version: 0.9
-  scored_at: '2026-08-04'
-  run_ts: 2026-08-04T083143
-  composite: 53.9
+  schema_version: 0.18.2
+  scored_at: '2026-09-03'
+  run_ts: 2026-09-03T174231
+  composite: 46.4
   band: developing
   facets:
-    discoverability: 68.5
-    contract_quality: 59.7
-    governance: 41.7
-    operational_transparency: 42.1
-    developer_ergonomics: 47.8
-    commercial_clarity: 60.5
+    discoverability: 75.9
+    contract_quality: 51.7
+    governance: 11.4
+    operational_transparency: 7.9
+    developer_ergonomics: 59.5
+    commercial_clarity: 57.9
+    contract_governance: 11.4
+    access_clarity: 57.9
   agent_readiness:
-    score: 38.1
+    score: 30.6
     band: agent-ready
     dimensions:
       spec_presence: true
       agentic_access: derived
-      mcp_server: true
-      auth_clarity: false
+      reversibility_documented: false
+      mcp_server: documented
+      auth_clarity: bearer
       idempotency: false
-      error_semantics: false
+      error_semantics: documented
       openapi_examples: false
       rate_limit_signal: documented
       event_surface_described: derived
@@ -33,6 +36,10 @@ kin_score:
       consent_identity: false
       agent_card: near-conformant
       dry_run_mode: false
+      delegated_identity: false
+      protected_resource_metadata: false
+      dynamic_client_registration: false
+      agentic_commerce: false
   provenance:
     agentic_access: derived
     contracts:
