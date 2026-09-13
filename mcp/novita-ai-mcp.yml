@@ -1,0 +1,31 @@
+generated: '2026-09-11'
+method: probed
+source: https://github.com/novitalabs/novita-mcp-server
+status: published
+server:
+  name: novita-ai
+  transport: http
+  url: https://novita.ai/mcp
+deployment:
+  mode: remote
+  endpoint: https://novita.ai/mcp
+  verified: probed
+  probe: live
+  checked: '2026-09-11'
+  source: ptr_only reconciliation 2026-09-11 (apis.yml pointed here, no manifest existed)
+tools_count: 6
+tools:
+- name: open_novita_console
+  description: ''
+- name: open_model_api_workflow
+  description: ''
+- name: open_gpu_workflow
+  description: ''
+- name: open_sandbox_workflow
+  description: ''
+- name: open_novita_docs
+  description: ''
+- name: open_novita_auth
+  description: ''
+tools_source: live tools/list via initialize handshake, 2026-09-11 (signals/audit_mcp_authorship.py --probe)
+authorship: provider
