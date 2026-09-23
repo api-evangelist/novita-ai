@@ -1,7 +1,7 @@
 {
   "provider": "novita-ai",
   "sources": [
-    "novita-ai-openai-api-openapi.yml"
+    "_original/novita-ai-openapi.json"
   ],
   "outputs": [
     "novita-ai-openai-api-openapi.yml"
@@ -9,6 +9,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "novita-ai-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "novita-ai-openapi.json: tagged paths GET /openai/v1/models -> Openai",
+    "novita-ai-openapi.json: tagged paths POST /openai/v1/chat/completions -> Openai",
+    "novita-ai-openapi.json: tagged paths POST /openai/v1/completions -> Openai",
+    "novita-ai-openapi.json: tagged paths POST /openai/v1/embeddings -> Openai",
+    "novita-ai-openapi.json: declared missing tag: Openai",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "novita-ai-openai-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
