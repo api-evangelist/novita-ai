@@ -16,16 +16,23 @@ deployment:
 tools_count: 6
 tools:
 - name: open_novita_console
-  description: ''
+  description: Open a Novita console area such as overview, API keys, billing, quota limits, GPU Cloud,
+    Model API, or Agent Sandbox.
 - name: open_model_api_workflow
-  description: ''
+  description: Open a Novita Model API workflow such as model library, playgrounds, dedicated endpoints,
+    or pricing.
 - name: open_gpu_workflow
-  description: ''
+  description: Open a Novita GPU Cloud workflow such as instances, serverless, templates, storage, jobs,
+    settings, or pricing.
 - name: open_sandbox_workflow
-  description: ''
+  description: Open a Novita Agent Sandbox workflow such as overview, console, templates, usage, pricing,
+    or docs.
 - name: open_novita_docs
-  description: ''
+  description: Open Novita documentation for quick start, Model API, LLM API, Serverless GPUs, GPU Instances,
+    Sandbox, or API reference.
 - name: open_novita_auth
-  description: ''
+  description: Open a Novita authentication page for login, registration, or password reset.
 tools_source: live tools/list via initialize handshake, 2026-09-11 (signals/audit_mcp_authorship.py --probe)
 authorship: provider
+descriptions_source: live tools/list (authorship probe or saved capture); filled by backfill-tools-from-authorship.py
+  --descriptions, 2026-09-28
