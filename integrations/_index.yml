@@ -64,6 +64,6 @@
     note: 'novita-ai declares OpenAI compatibility: ''description: Discovery document for Novita''s OpenAI-compatible
       model APIs and platform APIs.'''
     detected_by: sweep-model-routing.py
-    detected: '2026-10-13'
+    detected: '2026-10-15'
   status: not-a-workflow
   arazzo: null
