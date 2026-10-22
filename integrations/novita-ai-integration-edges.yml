@@ -1,4 +1,36 @@
 edges:
+- partner_name: A2A protocol (own Agent Card)
+  partner: null
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: A2A agent
+  evidence: https://novita.ai/.well-known/agent-card.json
+  channel: provider-built
+  relationship: compatible
+  shape: a2a
+  evidence_kind: own-wellknown
+  degree: near-conformant
+  report_only: true
+  a2a_card:
+    grade: near-conformant
+    verdict: live
+    protocol_version: 0.3.0
+    deviations: []
+    card_subject: unknown
+  contract_reference:
+    register: provider's own /.well-known/agent-card.json
+    spec_file: null
+    standard: A2A
+    role: a2a-agent-card
+    registered_name: Novita AI
+    organization: Novita AI
+    matched_domain: novita.ai
+    matched_by: own-domain
+    detected_by: sweep-ai-agents.py
+    detected: '2026-10-19'
+  detected_by: sweep-ai-agents.py
+  first_seen: '2026-10-15'
 - partner_name: OpenRouter
   partner: openrouter
   partner_match: router
@@ -11,10 +43,10 @@ edges:
   - inference-host
   router_signals:
     inference-host:
-      models: 52
+      models: 47
       router_ids:
       - Novita
-      tools_share: 0.9
+      tools_share: 0.96
       structured_output_share: 0.79
   matched_by: verified-token-table
   detected_by: sweep-model-routing.py
@@ -51,7 +83,7 @@ edges:
   - provider
   router_signals:
     provider:
-      models: 52
+      models: 53
       router_ids:
       - novita
       tools_share: 0.87
@@ -93,41 +125,9 @@ edges:
     note: 'novita-ai declares OpenAI compatibility: ''description: Discovery document for Novita''s OpenAI-compatible
       model APIs and platform APIs.'''
     detected_by: sweep-model-routing.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
   detected_by: sweep-model-routing.py
   first_seen: '2026-10-13'
-- partner_name: A2A protocol (own Agent Card)
-  partner: null
-  partner_match: register
-  type: register
-  direction: provider-built
-  category: A2A agent
-  evidence: https://novita.ai/.well-known/agent-card.json
-  channel: provider-built
-  relationship: compatible
-  shape: a2a
-  evidence_kind: own-wellknown
-  degree: near-conformant
-  report_only: true
-  a2a_card:
-    grade: near-conformant
-    verdict: live
-    protocol_version: 0.3.0
-    deviations: []
-    card_subject: unknown
-  contract_reference:
-    register: provider's own /.well-known/agent-card.json
-    spec_file: null
-    standard: A2A
-    role: a2a-agent-card
-    registered_name: Novita AI
-    organization: Novita AI
-    matched_domain: novita.ai
-    matched_by: own-domain
-    detected_by: sweep-ai-agents.py
-    detected: '2026-10-15'
-  detected_by: sweep-ai-agents.py
-  first_seen: '2026-10-15'
 generated: '2026-10-13'
 method: searched
 checked:
