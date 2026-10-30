@@ -1,4 +1,4 @@
-# Novita AI (novita-ai)
+# Novita AI
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,120 +66,149 @@
 
 Novita AI is an AI inference cloud offering serverless LLM, image, video, and audio generation APIs alongside on-demand GPU rentals and serverless GPU endpoints. Hosts open-source models with both native and OpenAI-compatible chat surfaces, plus an agent sandbox and MCP server for tool-using agents.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/novita-ai/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/novita-ai/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · LLM · Inference · GPU · OpenAI-Compatible · Image Generation · Video Generation · Audio · Embeddings · Sandbox · MCP · A2A
 
-## Tags
+## Novita AI on APIs.io
 
-- AI
-- LLM
-- Inference
-- GPU
-- OpenAI Compatible
-- Image Generation
-- Video Generation
-- Audio
-- Embeddings
-- Sandbox
-- MCP
+Everything profiled for Novita AI is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/novita-ai/](https://apis.io/providers/novita-ai/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (2)
 
-- **Created:** 2026-05-08
-- **Modified:** 2026-05-30
+- [Novita AI GPU API](https://apis.io/apis/novita-ai/gpu/) — On-demand GPU instance management and templates plus serverless GPU endpoints. Create, start, stop, and delete instances; list products and templates; query…
+- [Novita AI Openai API](https://apis.io/apis/novita-ai/novita-ai-openai-api/) — The Openai API from Novita AI — 4 operation(s) for openai.
 
-## APIs
+### Published properties
 
-### Novita AI Platform API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-LLM chat completions (OpenAI-compatible), embeddings, reranking, batch, image generation (FLUX.1, Seedream 3.0/4.0, Qwen), image editing (upscale, background removal/replacement, inpaint, reimagine), video (Hunyuan, Kling V2.1, Vidu Q1, MiniMax Hailuo), audio (MiniMax Speech 02 HD TTS and GLM ASR), authentication, billing, and account management. Native base URL https://api.novita.ai; OpenAI-compatible https://api.novita.ai/openai.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://novita.ai/docs/api-reference/api-reference-overview](https://novita.ai/docs/api-reference/api-reference-overview)
-- **Base URL:** `https://api.novita.ai`
+Event-driven and webhook contracts.
 
-#### Tags
+- [Novita AI Streaming & Webhook API](https://apis.io/asyncapis/novita-ai/novita-ai-asyncapi/)
 
-- AI
-- LLM
-- Chat Completions
-- Embeddings
-- Reranking
-- Image Generation
-- Image Editing
-- Video Generation
-- Audio
-- Batch
-- Files
-- Budget
+#### Event channels (2)
 
-#### Properties
+Individual events and webhooks the provider emits.
 
-- [Documentation](https://novita.ai/docs/)
-- [API Reference](https://novita.ai/docs/api-reference/api-reference-overview)
-- [OpenAPI](openapi/novita-ai-openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/novita-ai.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/novita-ai.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Open A P I Discovery](https://novita.ai/.well-known/openapi.json)
-- [AsyncAPI](asyncapi/novita-ai-asyncapi.yaml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Open A I Compatible Base U R L](https://api.novita.ai/openai)
-- [Authentication](https://novita.ai/docs/api-reference/basic-authentication)
-- [Error Codes](https://novita.ai/docs/api-reference/basic-error-code)
-- [Model Catalog](https://novita.ai/models)
-- [Sign Up](https://novita.ai/)
-- [Pricing](https://novita.ai/pricing)
+- [/openai/v1/chat/completions](https://apis.io/channels/novita-ai/openai-v1-chat-completions/)
+- [webhook/task-result](https://apis.io/channels/novita-ai/webhook-task-result/)
 
-### Novita AI GPU API
+#### MCP servers (2)
 
-On-demand GPU instance management and templates plus serverless GPU endpoints. Create, start, stop, and delete instances; list products and templates; query usage-based and fixed-term billing.
+Model Context Protocol servers that expose the API to agents.
 
-- **Human URL:** [https://novita.ai/docs/api-reference/gpu-instance-create-instance](https://novita.ai/docs/api-reference/gpu-instance-create-instance)
-- **Base URL:** `https://api.novita.ai`
+- [novita-ai](https://apis.io/servers/novita-ai/novita-ai/)
+- [novita-mcp-server](https://apis.io/servers/novita-ai/novita-mcp-server/)
 
-#### Tags
+#### Agentic access (1)
 
-- GPU
-- Compute
-- Serverless
-- Instances
-- Templates
-- Billing
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Properties
+- [Novita Ai Agentic Access](https://apis.io/agentic-access/novita-ai/novita-ai-agentic-access/)
 
-- [Documentation](https://novita.ai/docs/)
-- [API Reference](https://novita.ai/docs/api-reference/gpu-instance-create-instance)
-- [Product Page](https://novita.ai/gpus)
-- [Serverless Product Page](https://novita.ai/serverless)
-- [Postman Collection](collections/novita-ai.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/novita-ai.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Collections (2)
 
-## Common Properties
+Postman and Open Collection request collections.
+
+- [Novita API](https://apis.io/collections/novita-ai/open-novita-ai/)
+- [Novita Openai API](https://apis.io/collections/novita-ai/open-novita-ai-openai-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Novita AI — asyncapi rules](https://apis.io/rules/novita-ai/novita-ai-asyncapi-spectral-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Novita Ai Domain Security](https://apis.io/security/novita-ai/novita-ai-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Novita Ai Plans Pricing](https://apis.io/plans/novita-ai/novita-ai-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Novita Ai Rate Limits](https://apis.io/rate-limits/novita-ai/novita-ai-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Novita Ai Finops](https://apis.io/finops/novita-ai/novita-ai-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://novita.ai/)
 - [Documentation](https://novita.ai/docs/)
-- [API Reference](https://novita.ai/docs/api-reference/api-reference-overview)
-- [Guides](https://novita.ai/docs/guides/introduction)
+- [API reference](https://novita.ai/docs/api-reference/api-reference-overview)
 - [Pricing](https://novita.ai/pricing)
-- [Sign Up](https://novita.ai/)
 - [Blog](https://novita.ai/blog)
-- [Status Page](https://status.novita.ai)
-- [Terms of Service](https://novita.ai/legal/terms-of-service)
-- [Privacy Policy](https://novita.ai/legal/privacy-policy)
-- [GitHub Organization](https://github.com/novitalabs)
-- [LinkedIn](https://www.linkedin.com/company/novita-ai-labs)
-- [Twitter](https://x.com/novitalabs)
-- [Discord](https://discord.com/invite/Mqx7nWYzDF)
-- [L L Ms Txt](https://novita.ai/llms.txt)
-- [SDK](https://github.com/novitalabs/python-sdk)
-- [SDK](https://github.com/novitalabs/javascript-sdk)
-- [SDK](https://github.com/novitalabs/golang-sdk)
-- [SDK](https://github.com/novitalabs/langchain-novita)
-- [C L I](https://github.com/novitalabs/novita-cli)
-- [M C P Server](https://github.com/novitalabs/novita-mcp-server)
-- [Plans](plans/novita-ai-plans-pricing.yml)
-- [Rate Limits](rate-limits/novita-ai-rate-limits.yml)
-- [Fin Ops](finops/novita-ai-finops.yml)
+- [Terms of service](https://novita.ai/legal/terms-of-service)
+- [Privacy policy](https://novita.ai/legal/privacy-policy)
+- [GitHub](https://github.com/novitalabs)
+- [Status](https://status.novita.ai)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 44.6** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 49.7 |
+| Contract governance | 11.4 |
+| Operational transparency | 15.8 |
+| Developer ergonomics | 59.5 |
+| Access clarity | 50.0 |
+
+**Agent readiness 35.3** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | near-conformant (partial credit) |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 18.2** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/novita-ai/](https://apis.io/providers/novita-ai/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Novita AI: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/novita-ai/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
